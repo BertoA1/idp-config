@@ -1,0 +1,6 @@
+# image.tag and image.digest are owned by Gatekeeper (promotion PRs); do not edit by hand.
+image:
+  repository: ghcr.io/stefanprodan/podinfo
+  tag: "6.15.0"
+  digest: sha256:ec73780a8425f59ea49f5bc8cdff0d598805a224fbaa1f86c67a244f250fa9da
+port: 9898

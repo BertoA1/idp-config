@@ -1,0 +1,5 @@
+apiVersion: v2
+name: service
+description: Minimal Deployment + Service shared by all services
+type: application
+version: 0.1.0
