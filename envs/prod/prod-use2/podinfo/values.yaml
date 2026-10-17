@@ -4,3 +4,5 @@ image:
   tag: "6.15.0"
   digest: sha256:ec73780a8425f59ea49f5bc8cdff0d598805a224fbaa1f86c67a244f250fa9da
 port: 9898
+runAsUser: 100  # podinfo image user "app"
+probePath: /readyz

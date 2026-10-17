@@ -16,15 +16,18 @@ spec:
     spec:
       securityContext:
         runAsNonRoot: true
+        runAsUser: {{ .Values.runAsUser }}
       containers:
         - name: {{ .Release.Name }}
           image: "{{ if .Values.image.digest }}{{ .Values.image.repository }}@{{ .Values.image.digest }}{{ else }}{{ .Values.image.repository }}:{{ .Values.image.tag }}{{ end }}"
           ports:
             - containerPort: {{ .Values.port }}
+          {{- if .Values.probePath }}
           readinessProbe:
             httpGet:
-              path: /readyz
+              path: {{ .Values.probePath }}
               port: {{ .Values.port }}
+          {{- end }}
           resources:
             requests:
               cpu: 10m
