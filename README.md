@@ -16,7 +16,8 @@ as soon as it starts.
 
 ## Image fields
 
-Gatekeeper's app merges PRs here that set `image.tag` and `image.digest`. Humans don't edit image fields.
+Gatekeeper's app merges PRs here that set `image.tag` and `image.digest`. Humans don't edit image fields
+(one exception: seeding dev before the ruleset, see idp-infra's "Live integrations").
 When `image.digest` is set, the chart deploys `repository@digest` and `image.tag` is informational only.
 
 ## Repo settings
