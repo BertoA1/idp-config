@@ -3,3 +3,7 @@ image:
   tag: ""
   digest: ""
 port: 8080
+# numeric uid required by runAsNonRoot when the image user is non-numeric
+runAsUser: 10001
+# readiness probe path; no probe when empty
+probePath: ""
