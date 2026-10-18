@@ -9,4 +9,7 @@ spec:
     app.kubernetes.io/name: {{ .Release.Name }}
   ports:
     - port: {{ .Values.port }}
+      {{- if .Values.metrics.enabled }}
+      name: http  # the ServiceMonitor scrapes this port by name
+      {{- end }}
       targetPort: {{ .Values.port }}
