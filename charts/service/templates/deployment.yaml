@@ -5,7 +5,9 @@ metadata:
   labels:
     app.kubernetes.io/name: {{ .Release.Name }}
 spec:
-  replicas: 1
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicas }}
+  {{- end }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ .Release.Name }}
@@ -29,6 +31,4 @@ spec:
               port: {{ .Values.port }}
           {{- end }}
           resources:
-            requests:
-              cpu: 10m
-              memory: 32Mi
+            {{- toYaml .Values.resources | nindent 12 }}
