@@ -7,3 +7,35 @@ port: 8080
 runAsUser: 10001
 # readiness probe path; no probe when empty
 probePath: ""
+replicas: 1
+resources:
+  requests:
+    cpu: 10m
+    memory: 32Mi
+
+# Everything below is opt-in; with the defaults the chart renders exactly what 0.1.0 did.
+
+# ServiceMonitor for kube-prometheus-stack (it selects monitors in every namespace).
+metrics:
+  enabled: false
+  path: /metrics
+  interval: 30s
+
+# PodDisruptionBudget. Only useful with replicas (or autoscaling.minReplicas) >= 2: with 1 replica and
+# minAvailable 1 it blocks node drains.
+pdb:
+  enabled: false
+  minAvailable: 1
+
+# HorizontalPodAutoscaler on CPU (needs resources.requests.cpu); replaces `replicas`.
+autoscaling:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 80
+
+# Ingress NetworkPolicy for the pod: allows the same namespace, the namespaces listed here, and `monitoring`
+# when metrics.enabled; everything else is denied. Egress is not restricted.
+networkPolicy:
+  enabled: false
+  allowFromNamespaces: []
